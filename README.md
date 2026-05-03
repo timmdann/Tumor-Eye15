@@ -132,6 +132,8 @@ src/
 ```
 
 4. Open Pull Request into `dev`
+   - Add teammates as **Reviewers**
+   - PR should not be merged without at least 1 approval
 5. After review — merge and delete branch
 6. `dev` → `main` only when releasing a stable version
 
