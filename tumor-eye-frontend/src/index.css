@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Abhaya Libre", serif;
+  --font-body: "Abhaya Libre", serif;
+}
+
+:root {
+  --c-bg: #d9d9d9;
+  --c-surface: #d9d9d9;
+  --c-panel: #799a94;
+  --c-text: #1c2b2e;
+  --c-muted: #4a7c73;
+  --c-accent: #4a7c73;
+  --c-accent-light: #799a94;
+  --c-border: rgba(28, 43, 46, 0.15);
+}
+
+.dark {
+  --c-bg: #1c2b2e;
+  --c-surface: #1c2b2e;
+  --c-panel: #4a7c73;
+  --c-text: #d9d9d9;
+  --c-muted: #799a94;
+  --c-accent: #4a7c73;
+  --c-accent-light: #799a94;
+  --c-border: rgba(121, 154, 148, 0.2);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease,
+      fill 0.3s ease,
+      stroke 0.3s ease;
+  }
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: "Abhaya Libre", serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes levitate {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes shadow-pulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.65);
+    opacity: 0.12;
+  }
+}
+
+.anim-levitate {
+  animation: levitate 4s ease-in-out infinite;
+}
+
+.anim-shadow-pulse {
+  animation: shadow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-delay-1 {
+  animation-delay: 0.1s;
+}
+.anim-delay-2 {
+  animation-delay: 0.25s;
+}
+.anim-delay-3 {
+  animation-delay: 0.4s;
+}
+.anim-delay-4 {
+  animation-delay: 0.55s;
+}
+.anim-delay-5 {
+  animation-delay: 0.7s;
+}
