@@ -7,8 +7,16 @@ const NAV_LINKS = [
   { label: "FAQ", path: "/faq" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  backTo?: string;
+}
+
+export default function Navbar({ backTo }: NavbarProps = {}) {
   const { isDark, toggleTheme } = useTheme();
+
+  const links = backTo
+    ? [{ label: "← Back", path: backTo }, ...NAV_LINKS.slice(0, -1)]
+    : NAV_LINKS;
 
   return (
     <div className="flex justify-end">
@@ -16,7 +24,7 @@ export default function Navbar() {
         className="flex items-center gap-6 px-8 rounded-bl-lg"
         style={{ width: 452, height: 65, backgroundColor: "var(--c-panel)" }}
       >
-        {NAV_LINKS.map(({ label, path }) => (
+        {links.map(({ label, path }) => (
           <Link
             key={label}
             to={path}
