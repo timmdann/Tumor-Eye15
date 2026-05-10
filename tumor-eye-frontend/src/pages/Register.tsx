@@ -33,10 +33,7 @@ export default function Register() {
   return (
     <div
       className="min-h-screen flex overflow-hidden"
-      style={{
-        backgroundColor: "var(--c-bg)",
-        fontFamily: "Abhaya Libre, serif",
-      }}
+      style={{ backgroundColor: "var(--c-bg)", fontFamily: "Abhaya Libre, serif" }}
     >
       <aside
         className="min-h-screen shrink-0 w-[360px] px-[50px] pt-[118px] anim-fade-up"
@@ -48,14 +45,8 @@ export default function Register() {
         >
           Create your account
         </h1>
-        <div
-          className="w-[175px] h-px mb-[12px]"
-          style={{ backgroundColor: "var(--c-accent)" }}
-        />
-        <p
-          className="text-[14px] font-semibold"
-          style={{ color: "var(--c-accent)" }}
-        >
+        <div className="w-[175px] h-px mb-[12px]" style={{ backgroundColor: "var(--c-accent)" }} />
+        <p className="text-[14px] font-semibold" style={{ color: "var(--c-accent)" }}>
           TumorEye&apos;15
         </p>
       </aside>
@@ -65,30 +56,14 @@ export default function Register() {
 
         <section className="absolute left-[85px] top-1/2 -translate-y-1/2 w-[420px]">
           <form className="flex flex-col gap-[28px]" onSubmit={handleSubmit}>
-            <FormInput
-              label="Username"
-              delay="anim-delay-1"
-              value={username}
-              onChange={setUsername}
-            />
-            <FormInput
-              label="Email Address"
-              delay="anim-delay-2"
-              value={email}
-              onChange={setEmail}
-            />
+            <FormInput label="Username" delay="anim-delay-1" value={username} onChange={setUsername} />
+            <FormInput label="Email Address" delay="anim-delay-2" value={email} onChange={setEmail} />
 
             <div className="anim-fade-up anim-delay-3">
-              <label
-                className="block text-[14px] font-bold mb-[12px]"
-                style={{ color: "var(--c-text)" }}
-              >
+              <label className="block text-[14px] font-bold mb-[12px]" style={{ color: "var(--c-text)" }}>
                 Password
               </label>
-              <div
-                className="flex items-center border-b pb-[8px]"
-                style={{ borderColor: "var(--c-line)" }}
-              >
+              <div className="flex items-center border-b pb-[8px]" style={{ borderColor: "var(--c-line)" }}>
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -108,18 +83,8 @@ export default function Register() {
             </div>
 
             <div className="flex gap-[38px] pt-[18px] anim-fade-up anim-delay-4">
-              <RoleButton
-                active={role === "student"}
-                onClick={() => setRole("student")}
-              >
-                Student
-              </RoleButton>
-              <RoleButton
-                active={role === "doctor"}
-                onClick={() => setRole("doctor")}
-              >
-                Doctor
-              </RoleButton>
+              <RoleButton active={role === "student"} onClick={() => setRole("student")}>Student</RoleButton>
+              <RoleButton active={role === "doctor"} onClick={() => setRole("doctor")}>Doctor</RoleButton>
             </div>
 
             {error && (
@@ -133,24 +98,14 @@ export default function Register() {
                 type="submit"
                 disabled={loading}
                 className="w-[172px] h-[45px] rounded-sm border-none cursor-pointer text-[14px] font-extrabold transition-opacity hover:opacity-90 disabled:opacity-50"
-                style={{
-                  backgroundColor: "var(--c-button)",
-                  color: "var(--c-button-text)",
-                }}
+                style={{ backgroundColor: "var(--c-button)", color: "var(--c-button-text)" }}
               >
                 {loading ? "Registering..." : "Register"}
               </button>
 
-              <p
-                className="mt-[14px] text-[12px] font-bold"
-                style={{ color: "var(--c-text)" }}
-              >
+              <p className="mt-[14px] text-[12px] font-bold" style={{ color: "var(--c-text)" }}>
                 Already registered?{" "}
-                <Link
-                  to="/login"
-                  className="no-underline"
-                  style={{ color: "var(--c-text)" }}
-                >
+                <Link to="/login" className="no-underline" style={{ color: "var(--c-text)" }}>
                   Login →
                 </Link>
               </p>
