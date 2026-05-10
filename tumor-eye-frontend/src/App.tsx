@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import Landing from "@/pages/Landing";
 import Register from "@/pages/Register";
 import FAQ from "@/pages/FAQ";
+import AboutUs from "@/pages/AboutUs";
 import Soon from "@/components/Soon";
 
 function AnimatedRoutes() {
@@ -17,7 +18,7 @@ function AnimatedRoutes() {
         <Route path="/doctor/chat" element={<Soon name="Doctor Chat" />} />
         <Route path="/student/upload" element={<Soon name="Student Upload" />} />
         <Route path="/student/result" element={<Soon name="Student Result" />} />
-        <Route path="/about" element={<Soon name="About Us" />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/terms" element={<Soon name="Terms of Service" />} />
         <Route path="*" element={<Navigate to="/" replace />} />

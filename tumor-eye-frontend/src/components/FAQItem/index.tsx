@@ -9,32 +9,50 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ borderBottom: "1px solid var(--c-accent)" }}>
+    <div>
       <button
+        type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between py-4 text-left bg-transparent border-none cursor-pointer"
+        className="
+          w-full
+          flex items-center justify-between
+          py-[22px]
+          text-left
+          bg-transparent
+          border-none
+          cursor-pointer
+          px-0
+        "
+        style={{
+          borderBottom: "1px solid var(--c-accent)",
+        }}
       >
         <span
           style={{
             fontFamily: "Abhaya Libre, serif",
-            fontSize: "clamp(16px, 1.5vw, 20px)",
-            fontWeight: 700,
+            fontSize: "clamp(17px, 1.45vw, 21px)",
+            fontWeight: 800,
+            lineHeight: 1.15,
             color: "var(--c-text)",
           }}
         >
           {question}
         </span>
+
         <span
           key={open ? "minus" : "plus"}
           className="icon-pop"
           style={{
-            fontSize: 26,
+            fontSize: 24,
             lineHeight: 1,
             marginLeft: 24,
             flexShrink: 0,
             color: "var(--c-accent)",
             fontWeight: 300,
-            display: "inline-block",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 18,
             transition: "color 0.3s ease",
           }}
         >
@@ -42,7 +60,6 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
         </span>
       </button>
 
-      {/* CSS Grid trick: animates height without a fixed max-height */}
       <div
         style={{
           display: "grid",
@@ -52,16 +69,17 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
       >
         <div style={{ overflow: "hidden" }}>
           <p
-            className="pb-5"
+            className="pb-[22px] pt-[14px]"
             style={{
               fontFamily: "Abhaya Libre, serif",
               fontSize: 16,
-              lineHeight: 1.75,
+              lineHeight: 1.65,
               color: "var(--c-text)",
               maxWidth: 760,
               opacity: open ? 1 : 0,
               transform: open ? "translateY(0)" : "translateY(-6px)",
-              transition: "opacity 0.3s ease 0.08s, transform 0.3s ease 0.08s, color 0.3s ease",
+              transition:
+                "opacity 0.3s ease 0.08s, transform 0.3s ease 0.08s, color 0.3s ease",
             }}
           >
             {answer}

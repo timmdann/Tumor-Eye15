@@ -1,5 +1,7 @@
-import Navbar from "@/components/Navbar";
+import { Link, useNavigate } from "react-router-dom";
+import { useTheme } from "@/context/ThemeContext";
 import FAQItem from "@/components/FAQItem";
+import BrainImage from "@/components/BrainImage";
 
 const FAQS = [
   {
@@ -30,22 +32,117 @@ const FAQS = [
 ];
 
 export default function FAQ() {
+  const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
+
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ backgroundColor: "var(--c-bg)" }}
+      style={{
+        backgroundColor: "var(--c-bg)",
+        fontFamily: "Abhaya Libre, serif",
+      }}
     >
-      {/* Header */}
-      <header style={{ backgroundColor: "var(--c-header)" }}>
-        <Navbar backTo="/" />
-        <div className="px-20 pb-12 mt-6 anim-fade-up anim-delay-1">
+      <header
+        className="relative h-[155px] shrink-0 flex items-center"
+        style={{ backgroundColor: "var(--c-sidebar)" }}
+      >
+        <div className="absolute top-0 right-0 anim-fade-up">
+          <nav
+            className="
+              h-[58px]
+              px-[26px]
+              rounded-bl-md
+              flex items-center gap-[28px]
+            "
+            style={{ backgroundColor: "var(--c-panel)" }}
+          >
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="bg-transparent border-none cursor-pointer text-[13px] font-bold whitespace-nowrap"
+              style={{ color: "var(--c-panel-text)" }}
+            >
+              ← Back
+            </button>
+
+            <Link
+              to="/about"
+              className="no-underline text-[13px] font-bold whitespace-nowrap"
+              style={{ color: "var(--c-panel-text)" }}
+            >
+              About Us
+            </Link>
+
+            <Link
+              to="/terms"
+              className="no-underline text-[13px] font-bold whitespace-nowrap"
+              style={{ color: "var(--c-panel-text)" }}
+            >
+              Terms of Service
+            </Link>
+
+            <Link
+              to="/profile"
+              className="no-underline text-[13px] font-bold whitespace-nowrap"
+              style={{ color: "var(--c-panel-text)" }}
+            >
+              Profile
+            </Link>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="bg-transparent border-none cursor-pointer flex items-center justify-center"
+              style={{ color: "var(--c-panel-text)" }}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+              ) : (
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
+            </button>
+          </nav>
+        </div>
+
+        <div className="w-full px-[62px] anim-fade-up anim-delay-1">
           <h1
             className="font-bold"
             style={{
-              fontFamily: "Abhaya Libre, serif",
-              fontSize: "clamp(36px, 4.5vw, 60px)",
-              color: "var(--c-bg)",
-              lineHeight: 1.1,
+              fontSize: "clamp(38px, 3.9vw, 58px)",
+              lineHeight: 1,
+              color: "var(--c-sidebar-text)",
             }}
           >
             Frequently Asked Questions
@@ -53,35 +150,54 @@ export default function FAQ() {
         </div>
       </header>
 
-      {/* Content */}
-      <main className="flex-1 px-20 py-12">
-        <p
-          className="mb-10 font-extrabold anim-fade-up anim-delay-2"
-          style={{
-            fontFamily: "Abhaya Libre, serif",
-            fontSize: "clamp(18px, 1.8vw, 26px)",
-            lineHeight: 1.5,
-            color: "var(--c-text)",
-            maxWidth: 760,
-          }}
-        >
-          Have another question and can't find the answer you're looking for?
-          <br />
-          Contact us by sending an email.
-        </p>
+      <main className="relative flex-1 px-[62px] pt-[36px] pb-[48px] overflow-hidden">
+        <div className="relative z-10">
+          <p
+            className="mb-[24px] font-extrabold anim-fade-up anim-delay-2"
+            style={{
+              fontSize: "clamp(24px, 2.15vw, 32px)",
+              lineHeight: 1.28,
+              color: "var(--c-text)",
+              maxWidth: 1040,
+            }}
+          >
+            Have another question and can&apos;t find the answer you&apos;re
+            looking for?
+            <br />
+            Contact us by sending an{" "}
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=tumoreye15@gmail.com&su=Question%20about%20Tumor%20Eye%2715"
+              target="_blank"
+              rel="noreferrer"
+              className="no-underline"
+              style={{
+                color: "var(--c-text)",
+              }}
+            >
+              email →
+            </a>
+          </p>
 
-        <div
-          className="anim-fade-up anim-delay-3"
-          style={{ borderTop: "1px solid var(--c-accent)", maxWidth: 760 }}
-        >
-          {FAQS.map((faq) => (
-            <FAQItem
-              key={faq.question}
-              question={faq.question}
-              answer={faq.answer}
-            />
-          ))}
+          <div
+            className="anim-fade-up anim-delay-3"
+            style={{
+              maxWidth: 900,
+            }}
+          >
+            {FAQS.map((faq) => (
+              <FAQItem
+                key={faq.question}
+                question={faq.question}
+                answer={faq.answer}
+              />
+            ))}
+          </div>
         </div>
+
+        <BrainImage
+          className="right-[140px] top-[54%] -translate-y-1/2 opacity-35"
+          imageClassName="w-72 h-72"
+        />
       </main>
     </div>
   );
