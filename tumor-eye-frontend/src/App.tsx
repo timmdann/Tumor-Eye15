@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Landing from "@/pages/Landing";
+import Register from "@/pages/Register";
 import FAQ from "@/pages/FAQ";
 import Soon from "@/components/Soon";
 
@@ -10,7 +11,7 @@ function AnimatedRoutes() {
       <Routes location={location}>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Soon name="Login" />} />
-        <Route path="/register" element={<Soon name="Register" />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/doctor/upload" element={<Soon name="Doctor Upload" />} />
         <Route path="/doctor/result" element={<Soon name="Doctor Result" />} />
         <Route path="/doctor/chat" element={<Soon name="Doctor Chat" />} />
