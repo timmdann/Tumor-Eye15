@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Landing from "@/pages/Landing";
+import Register from "@/pages/Register";
 
 const Soon = ({ name }: { name: string }) => (
   <div
@@ -16,7 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Soon name="Login" />} />
-        <Route path="/register" element={<Soon name="Register" />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/doctor/upload" element={<Soon name="Doctor Upload" />} />
         <Route path="/doctor/result" element={<Soon name="Doctor Result" />} />
         <Route path="/doctor/chat" element={<Soon name="Doctor Chat" />} />

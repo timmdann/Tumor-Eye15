@@ -14,6 +14,14 @@
   --c-accent: #4a7c73;
   --c-accent-light: #799a94;
   --c-border: rgba(28, 43, 46, 0.15);
+  --c-sidebar: #1c2b2e;
+  --c-sidebar-text: #f2f2ee;
+  --c-panel-text: #1c2b2e;
+  --c-muted-text: #1c2b2e;
+  --c-line: rgba(28, 43, 46, 0.35);
+  --c-button: #799a94;
+  --c-button-text: #1c2b2e;
+  --c-shadow: rgba(28, 43, 46, 0.35);
 }
 
 .dark {
@@ -25,6 +33,14 @@
   --c-accent: #4a7c73;
   --c-accent-light: #799a94;
   --c-border: rgba(121, 154, 148, 0.2);
+  --c-sidebar: #799a94;
+  --c-sidebar-text: #1c2b2e;
+  --c-panel-text: #d9d9d9;
+  --c-muted-text: #d9d9d9;
+  --c-line: rgba(217, 217, 217, 0.35);
+  --c-button: #799a94;
+  --c-button-text: #d9d9d9;
+  --c-shadow: rgba(0, 0, 0, 0.45);
 }
 
 @layer base {

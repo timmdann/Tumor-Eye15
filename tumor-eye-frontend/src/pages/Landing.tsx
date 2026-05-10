@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
+import BrainImage from "@/components/BrainImage";
 
 export default function Landing() {
   const navigate = useNavigate();
-  const { isDark } = useTheme();
 
   return (
     <div
@@ -25,7 +24,7 @@ export default function Landing() {
             }}
           >
             <span style={{ color: "var(--c-text)" }}>Tumor </span>
-            <span style={{ color: "var(--c-accent)" }}>Eye'15</span>
+            <span style={{ color: "var(--c-accent)" }}>Eye&apos;15</span>
           </h1>
 
           <div
@@ -53,43 +52,7 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Right — brain image */}
-        <div className="absolute right-20 top-1/2 -translate-y-1/2 pointer-events-none anim-fade-up anim-delay-4 w-96 h-96">
-          {/* Images — levitate */}
-          <div className="anim-levitate w-full h-full relative">
-            <img
-              src="/brain-light.png"
-              alt="Brain MRI"
-              className="absolute inset-0 w-full h-full object-contain"
-              style={{
-                opacity: isDark ? 0 : 1,
-                transition: "opacity 0.4s ease",
-              }}
-            />
-            <img
-              src="/brain-dark.png"
-              alt=""
-              className="absolute inset-0 w-full h-full object-contain"
-              style={{
-                opacity: isDark ? 1 : 0,
-                transition: "opacity 0.4s ease",
-              }}
-            />
-          </div>
-          {/* Shadow — pulses inversely */}
-          <div
-            className="anim-shadow-pulse absolute left-1/2"
-            style={{
-              bottom: "-8px",
-              width: "55%",
-              height: 18,
-              borderRadius: "50%",
-              background:
-                "radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 75%)",
-              filter: "blur(4px)",
-            }}
-          />
-        </div>
+        <BrainImage className="right-20 top-1/2 -translate-y-1/2" />
       </main>
     </div>
   );
