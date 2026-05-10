@@ -1,54 +1,54 @@
 @import "tailwindcss";
 
-@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
-
 @theme {
   --font-display: "Abhaya Libre", serif;
   --font-body: "Abhaya Libre", serif;
 }
 
 :root {
-  --c-bg:           #d9d9d9;
-  --c-surface:      #d9d9d9;
-  --c-panel:        #799a94;
-  --c-text:         #1c2b2e;
-  --c-muted:        #4a7c73;
-  --c-accent:       #4a7c73;
+  --c-bg: #d9d9d9;
+  --c-surface: #d9d9d9;
+  --c-panel: #799a94;
+  --c-text: #1c2b2e;
+  --c-muted: #4a7c73;
+  --c-accent: #4a7c73;
   --c-accent-light: #799a94;
-  --c-border:       rgba(28, 43, 46, 0.15);
-  --c-header:       #1c2b2e;
-  --c-sidebar:      #1c2b2e;
+  --c-border: rgba(28, 43, 46, 0.15);
+  --c-header: #1c2b2e;
+  --c-sidebar: #1c2b2e;
   --c-sidebar-text: #f2f2ee;
-  --c-panel-text:   #1c2b2e;
-  --c-muted-text:   #1c2b2e;
-  --c-line:         rgba(28, 43, 46, 0.35);
-  --c-button:       #799a94;
-  --c-button-text:  #1c2b2e;
-  --c-shadow:       rgba(28, 43, 46, 0.35);
+  --c-panel-text: #1c2b2e;
+  --c-muted-text: #1c2b2e;
+  --c-line: rgba(28, 43, 46, 0.35);
+  --c-button: #799a94;
+  --c-button-text: #1c2b2e;
+  --c-shadow: rgba(28, 43, 46, 0.35);
 }
 
 .dark {
-  --c-bg:           #1c2b2e;
-  --c-surface:      #1c2b2e;
-  --c-panel:        #4a7c73;
-  --c-text:         #d9d9d9;
-  --c-muted:        #799a94;
-  --c-accent:       #4a7c73;
+  --c-bg: #1c2b2e;
+  --c-surface: #1c2b2e;
+  --c-panel: #4a7c73;
+  --c-text: #d9d9d9;
+  --c-muted: #799a94;
+  --c-accent: #4a7c73;
   --c-accent-light: #799a94;
-  --c-border:       rgba(121, 154, 148, 0.2);
-  --c-header:       #799a94;
-  --c-sidebar:      #799a94;
+  --c-border: rgba(121, 154, 148, 0.2);
+  --c-header: #799a94;
+  --c-sidebar: #799a94;
   --c-sidebar-text: #1c2b2e;
-  --c-panel-text:   #d9d9d9;
-  --c-muted-text:   #d9d9d9;
-  --c-line:         rgba(217, 217, 217, 0.35);
-  --c-button:       #799a94;
-  --c-button-text:  #d9d9d9;
-  --c-shadow:       rgba(0, 0, 0, 0.45);
+  --c-panel-text: #d9d9d9;
+  --c-muted-text: #d9d9d9;
+  --c-line: rgba(217, 217, 217, 0.35);
+  --c-button: #799a94;
+  --c-button-text: #d9d9d9;
+  --c-shadow: rgba(0, 0, 0, 0.45);
 }
 
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     transition:
       background-color 0.3s ease,
       color 0.3s ease,
@@ -67,40 +67,90 @@ body {
 }
 
 @keyframes levitate {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-16px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
 @keyframes shadow-pulse {
-  0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 0.25; }
-  50%       { transform: translateX(-50%) scaleX(0.65); opacity: 0.12; }
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.65);
+    opacity: 0.12;
+  }
 }
 
-.anim-levitate     { animation: levitate 4s ease-in-out infinite; }
-.anim-shadow-pulse { animation: shadow-pulse 4s ease-in-out infinite; }
+.anim-levitate {
+  animation: levitate 4s ease-in-out infinite;
+}
+.anim-shadow-pulse {
+  animation: shadow-pulse 4s ease-in-out infinite;
+}
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.anim-fade-up { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.anim-delay-1 { animation-delay: 0.1s; }
-.anim-delay-2 { animation-delay: 0.25s; }
-.anim-delay-3 { animation-delay: 0.4s; }
-.anim-delay-4 { animation-delay: 0.55s; }
-.anim-delay-5 { animation-delay: 0.7s; }
+.anim-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-delay-1 {
+  animation-delay: 0.1s;
+}
+.anim-delay-2 {
+  animation-delay: 0.25s;
+}
+.anim-delay-3 {
+  animation-delay: 0.4s;
+}
+.anim-delay-4 {
+  animation-delay: 0.55s;
+}
+.anim-delay-5 {
+  animation-delay: 0.7s;
+}
 
 @keyframes pageFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.page-enter { animation: pageFade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.page-enter {
+  animation: pageFade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
 @keyframes iconPop {
-  from { opacity: 0; transform: scale(0.5); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.icon-pop { animation: iconPop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.icon-pop {
+  animation: iconPop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
