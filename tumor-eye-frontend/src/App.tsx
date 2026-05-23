@@ -10,6 +10,9 @@ import Register from "@/pages/Register";
 import FAQ from "@/pages/FAQ";
 import AboutUs from "@/pages/AboutUs";
 import Soon from "@/components/Soon";
+import StudentAnalysis from "@/pages/StudentAnalysis";
+import DoctorAnalysis from "@/pages/DoctorAnalysis";
+import DoctorChat from "@/pages/DoctorChat";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -19,11 +22,11 @@ function AnimatedRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Soon name="Login" />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/doctor/upload" element={<Soon name="Doctor Upload" />} />
-        <Route path="/doctor/result" element={<Soon name="Doctor Result" />} />
-        <Route path="/doctor/chat" element={<Soon name="Doctor Chat" />} />
-        <Route path="/student/upload" element={<Soon name="Student Upload" />} />
-        <Route path="/student/result" element={<Soon name="Student Result" />} />
+        <Route path="/doctor/upload" element={<DoctorAnalysis />} />
+        <Route path="/doctor/result" element={<DoctorAnalysis />} />
+        <Route path="/doctor/chat" element={<DoctorChat />} />
+        <Route path="/student/upload" element={<StudentAnalysis />} />
+        <Route path="/student/result" element={<StudentAnalysis />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/terms" element={<Soon name="Terms of Service" />} />
