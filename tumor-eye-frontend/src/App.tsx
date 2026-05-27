@@ -13,7 +13,8 @@ import Soon from "@/components/Soon";
 import StudentAnalysis from "@/pages/StudentAnalysis";
 import DoctorAnalysis from "@/pages/DoctorAnalysis";
 import DoctorChat from "@/pages/DoctorChat";
-import TermsOfService from "./pages/TermsOfService";
+import TermsOfService from "@/pages/TermsOfService";
+import Login from "@/pages/Login";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function AnimatedRoutes() {
     >
       <Routes location={location}>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Soon name="Login" />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/doctor/upload" element={<DoctorAnalysis />} />
         <Route path="/doctor/result" element={<DoctorAnalysis />} />
