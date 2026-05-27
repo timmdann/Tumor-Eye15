@@ -1,26 +1,26 @@
-type BrainImageProps = {
-  className?: string;
-  imageClassName?: string;
-};
+import React from "react";
+import type { CSSProperties } from "react";
 
-export default function BrainImage({
+interface BrainImageProps {
+  className?: string;
+  containerClassName?: string;
+  style?: CSSProperties;
+}
+
+function BrainImage({
   className = "",
-  imageClassName = "w-96 h-96",
+  containerClassName = "w-96 h-96",
+  style,
 }: BrainImageProps) {
   return (
     <div
-      className={`
-        absolute
-        pointer-events-none
-        anim-fade-up anim-delay-4
-        ${imageClassName}
-        ${className}
-      `}
+      className={`absolute pointer-events-none anim-fade-up anim-delay-4 ${containerClassName} ${className}`}
+      style={style}
     >
       <div className="anim-levitate w-full h-full relative z-10">
         <img
-          src="/brain-dark.png"
-          alt="Brain MRI"
+          src="/brain.png"
+          alt="Brain MRI visualization"
           className="absolute inset-0 w-full h-full object-contain"
         />
       </div>
@@ -40,3 +40,5 @@ export default function BrainImage({
     </div>
   );
 }
+
+export default React.memo(BrainImage);

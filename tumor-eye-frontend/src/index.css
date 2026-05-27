@@ -6,6 +6,8 @@
 }
 
 :root {
+  --navbar-height: 65px;
+  --navbar-height-mobile: 58px;
   --c-bg: #d9d9d9;
   --c-surface: #d9d9d9;
   --c-panel: #799a94;
@@ -46,6 +48,12 @@
 }
 
 @layer base {
+  html {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    scrollbar-gutter: stable;
+  }
+
   *,
   *::before,
   *::after {
@@ -56,6 +64,10 @@
       fill 0.3s ease,
       stroke 0.3s ease;
   }
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {
@@ -98,7 +110,20 @@ body {
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
   }
   to {
     opacity: 1;
@@ -106,8 +131,8 @@ body {
   }
 }
 
-.anim-fade-up {
-  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+.anim-slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .anim-delay-1 {
   animation-delay: 0.1s;
@@ -128,16 +153,15 @@ body {
 @keyframes pageFade {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .page-enter {
-  animation: pageFade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: pageFade 0.3s ease both;
+  min-height: 100svh;
 }
 
 @keyframes iconPop {
@@ -153,4 +177,149 @@ body {
 
 .icon-pop {
   animation: iconPop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* AnalyzingScreen animations */
+@keyframes analyzingPulseOuter {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.04);
+    opacity: 0.6;
+  }
+}
+@keyframes analyzingPulseMiddle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.97);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 0.8;
+  }
+}
+@keyframes analyzingPulseInner {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.98);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.02);
+    opacity: 1;
+  }
+}
+@keyframes analyzingCenterPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+@keyframes analyzingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes analyzingSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes analyzingDotPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+@keyframes analyzingTextPulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* DoctorChat animations */
+@keyframes chatMessageIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes dotBounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  40% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+.anim-chat-message {
+  animation: chatMessageIn 0.42s ease-out both;
+}
+
+.typing-dot {
+  animation: dotBounce 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+.chat-input::placeholder {
+  color: rgba(28, 43, 46, 0.55);
+}
+.dark .chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4a7c73 rgba(255, 255, 255, 0.04);
+}
+.chat-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a7c73;
+  border-radius: 999px;
+}
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #5f9288;
 }

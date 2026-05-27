@@ -1,4 +1,5 @@
-import React, {
+import {
+  useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -85,7 +86,7 @@ interface MasonryProps {
   colorShiftOnHover?: boolean;
 }
 
-const Masonry: React.FC<MasonryProps> = ({
+function Masonry({
   items,
   ease = "power3.out",
   duration = 0.6,
@@ -95,7 +96,7 @@ const Masonry: React.FC<MasonryProps> = ({
   hoverScale = 0.95,
   blurToFocus = true,
   colorShiftOnHover = false,
-}) => {
+}: MasonryProps) {
   const columns = useMedia(
     ["(min-width:1500px)", "(min-width:1000px)", "(min-width:600px)"],
     [3, 3, 2],
@@ -105,36 +106,39 @@ const Masonry: React.FC<MasonryProps> = ({
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
 
-  const getInitialPosition = (item: GridItem) => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return { x: item.x, y: item.y };
+  const getInitialPosition = useCallback(
+    (item: GridItem) => {
+      const containerRect = containerRef.current?.getBoundingClientRect();
+      if (!containerRect) return { x: item.x, y: item.y };
 
-    let direction = animateFrom;
-    if (animateFrom === "random") {
-      const dirs = ["top", "bottom", "left", "right"];
-      direction = dirs[
-        Math.floor(Math.random() * dirs.length)
-      ] as typeof animateFrom;
-    }
+      let direction = animateFrom;
+      if (animateFrom === "random") {
+        const dirs = ["top", "bottom", "left", "right"];
+        direction = dirs[
+          Math.floor(Math.random() * dirs.length)
+        ] as typeof animateFrom;
+      }
 
-    switch (direction) {
-      case "top":
-        return { x: item.x, y: -200 };
-      case "bottom":
-        return { x: item.x, y: window.innerHeight + 200 };
-      case "left":
-        return { x: -200, y: item.y };
-      case "right":
-        return { x: window.innerWidth + 200, y: item.y };
-      case "center":
-        return {
-          x: containerRect.width / 2 - item.w / 2,
-          y: containerRect.height / 2 - item.h / 2,
-        };
-      default:
-        return { x: item.x, y: item.y + 100 };
-    }
-  };
+      switch (direction) {
+        case "top":
+          return { x: item.x, y: -200 };
+        case "bottom":
+          return { x: item.x, y: window.innerHeight + 200 };
+        case "left":
+          return { x: -200, y: item.y };
+        case "right":
+          return { x: window.innerWidth + 200, y: item.y };
+        case "center":
+          return {
+            x: containerRect.width / 2 - item.w / 2,
+            y: containerRect.height / 2 - item.h / 2,
+          };
+        default:
+          return { x: item.x, y: item.y + 100 };
+      }
+    },
+    [animateFrom, containerRef],
+  );
 
   useEffect(() => {
     preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
@@ -199,35 +203,33 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, stagger, blurToFocus, duration, ease, getInitialPosition]);
 
-  const handleMouseEnter = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: hoverScale,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
-    }
-  };
+  const handleMouseEnter = useCallback(
+    (id: string, element: HTMLElement) => {
+      if (scaleOnHover) {
+        gsap.to(`[data-key="${id}"]`, { scale: hoverScale, duration: 0.3, ease: "power2.out" });
+      }
+      if (colorShiftOnHover) {
+        const overlay = element.querySelector(".color-overlay") as HTMLElement;
+        if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
+      }
+    },
+    [scaleOnHover, hoverScale, colorShiftOnHover],
+  );
 
-  const handleMouseLeave = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
-    }
-  };
+  const handleMouseLeave = useCallback(
+    (id: string, element: HTMLElement) => {
+      if (scaleOnHover) {
+        gsap.to(`[data-key="${id}"]`, { scale: 1, duration: 0.3, ease: "power2.out" });
+      }
+      if (colorShiftOnHover) {
+        const overlay = element.querySelector(".color-overlay") as HTMLElement;
+        if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
+      }
+    },
+    [scaleOnHover, colorShiftOnHover],
+  );
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
@@ -252,6 +254,6 @@ const Masonry: React.FC<MasonryProps> = ({
       ))}
     </div>
   );
-};
+}
 
 export default Masonry;
