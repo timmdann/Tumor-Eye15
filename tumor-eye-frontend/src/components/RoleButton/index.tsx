@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 interface RoleButtonProps {
   active: boolean;
@@ -6,25 +6,23 @@ interface RoleButtonProps {
   children: ReactNode;
 }
 
-export default function RoleButton({
-  active,
-  onClick,
-  children,
-}: RoleButtonProps) {
+function RoleButton({ active, onClick, children }: RoleButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="relative bg-transparent border-none cursor-pointer pb-[4px] text-[14px] font-extrabold"
+      className="relative bg-transparent border-none cursor-pointer pb-1 text-[14px] font-extrabold min-h-12"
       style={{ color: "var(--c-text)", opacity: active ? 1 : 0.28 }}
     >
       {children}
       {active && (
         <span
-          className="absolute left-0 right-0 -bottom-[1px] h-px"
+          className="absolute left-0 right-0 -bottom-px h-px"
           style={{ backgroundColor: "var(--c-text)" }}
         />
       )}
     </button>
   );
 }
+
+export default React.memo(RoleButton);

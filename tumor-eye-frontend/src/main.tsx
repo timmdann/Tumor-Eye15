@@ -9,18 +9,22 @@ import type { UserRole } from "@/types/api";
 import App from "./App";
 import "./index.css";
 
-supabase.auth.getSession().then(({ data: { session } }) => {
-  if (session?.user) {
+supabase.auth
+  .getSession()
+  .then(({ data: { session }, error }) => {
+    if (error || !session?.user) return;
     const meta = session.user.user_metadata;
     store.dispatch(
       setUser({
         role: meta.role as UserRole,
-        username: meta.username,
+        username: meta.username as string,
         email: session.user.email ?? "",
       }),
     );
-  }
-});
+  })
+  .catch(() => {
+    // user stays unauthenticated — no action needed
+  });
 
 supabase.auth.onAuthStateChange((_event, session) => {
   if (session?.user) {
@@ -28,7 +32,7 @@ supabase.auth.onAuthStateChange((_event, session) => {
     store.dispatch(
       setUser({
         role: meta.role as UserRole,
-        username: meta.username,
+        username: meta.username as string,
         email: session.user.email ?? "",
       }),
     );

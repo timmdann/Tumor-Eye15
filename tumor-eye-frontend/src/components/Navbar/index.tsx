@@ -1,31 +1,34 @@
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/context/ThemeContext";
-
-const NAV_LINKS = [
-  { label: "About Us", path: "/about" },
-  { label: "Terms of Service", path: "/terms" },
-  { label: "FAQ", path: "/faq" },
-  { label: "Profile", path: "/profile" },
-];
+import ThemeIcon from "@/components/ThemeIcon";
+import { NAV_LINKS } from "@/data/navLinks";
 
 interface NavbarProps {
   backTo?: string;
 }
 
-export default function Navbar({ backTo }: NavbarProps = {}) {
+function Navbar({ backTo }: NavbarProps = {}) {
   const { isDark, toggleTheme } = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const toggleMobile = useCallback(() => setMobileOpen((prev) => !prev), []);
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   const links = backTo
     ? [{ label: "← Back", path: backTo }, ...NAV_LINKS.slice(0, -1)]
     : NAV_LINKS;
 
   return (
-    <div className="flex justify-end">
+    <header
+      className="flex justify-end relative z-50 shrink-0"
+      style={{ height: "var(--navbar-height)" }}
+    >
+      {/* Desktop nav — absolutely anchored to right edge */}
       <nav
-        className="flex items-center px-7 rounded-bl-lg"
+        className="anim-slide-down hidden md:flex items-center px-7 rounded-bl-lg absolute right-0 top-0"
         style={{
           width: 560,
-          height: 65,
+          height: "var(--navbar-height)",
           backgroundColor: "var(--c-panel)",
         }}
       >
@@ -40,34 +43,80 @@ export default function Navbar({ backTo }: NavbarProps = {}) {
               {label}
             </Link>
           ))}
-
           <button
+            type="button"
             onClick={toggleTheme}
-            className="cursor-pointer border-none bg-transparent opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
+            className="cursor-pointer border-none bg-transparent opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center min-h-12 min-w-12"
             style={{ color: "var(--c-text)" }}
             aria-label="Toggle theme"
-            type="button"
           >
-            {isDark ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
+            <ThemeIcon isDark={isDark} />
           </button>
         </div>
       </nav>
-    </div>
+
+      {/* Mobile nav bar — absolutely anchored to right edge */}
+      <div
+        className="anim-slide-down md:hidden absolute right-0 top-0 flex items-center gap-2 px-4"
+        style={{
+          height: "var(--navbar-height-mobile)",
+          backgroundColor: "var(--c-panel)",
+        }}
+      >
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="bg-transparent border-none cursor-pointer flex items-center justify-center min-h-12 min-w-12"
+          style={{ color: "var(--c-text)" }}
+        >
+          <ThemeIcon isDark={isDark} />
+        </button>
+
+        <button
+          type="button"
+          onClick={toggleMobile}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          className="bg-transparent border-none cursor-pointer flex flex-col gap-1.5 items-center justify-center min-h-12 min-w-12 p-2"
+          style={{ color: "var(--c-text)" }}
+        >
+          <span
+            className="block w-5 h-0.5"
+            style={{ backgroundColor: "var(--c-text)" }}
+          />
+          <span
+            className="block w-5 h-0.5"
+            style={{ backgroundColor: "var(--c-text)" }}
+          />
+          <span
+            className="block w-5 h-0.5"
+            style={{ backgroundColor: "var(--c-text)" }}
+          />
+        </button>
+      </div>
+
+      {/* Mobile dropdown */}
+      {mobileOpen && (
+        <div
+          className="md:hidden absolute top-full right-0 w-52 rounded-bl-lg shadow-lg z-50"
+          style={{ backgroundColor: "var(--c-panel)" }}
+        >
+          {links.map(({ label, path }) => (
+            <Link
+              key={label}
+              to={path}
+              onClick={closeMobile}
+              className="flex items-center px-6 py-3 text-sm font-extrabold no-underline hover:opacity-80 transition-opacity min-h-12"
+              style={{ color: "var(--c-text)" }}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </header>
   );
 }
+
+export default React.memo(Navbar);
