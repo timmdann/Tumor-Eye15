@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface FAQItemProps {
   question: string;
   answer: string;
 }
 
-export default function FAQItem({ question, answer }: FAQItemProps) {
+function FAQItem({ question, answer }: FAQItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -13,19 +13,9 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="
-          w-full
-          flex items-center justify-between
-          py-[22px]
-          text-left
-          bg-transparent
-          border-none
-          cursor-pointer
-          px-0
-        "
-        style={{
-          borderBottom: "1px solid var(--c-accent)",
-        }}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between py-5.5 text-left bg-transparent border-none cursor-pointer px-0 min-h-12"
+        style={{ borderBottom: "1px solid var(--c-accent)" }}
       >
         <span
           style={{
@@ -69,7 +59,7 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
       >
         <div style={{ overflow: "hidden" }}>
           <p
-            className="pb-[22px] pt-[14px]"
+            className="pb-5.5 pt-3.5"
             style={{
               fontFamily: "Abhaya Libre, serif",
               fontSize: 16,
@@ -89,3 +79,5 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
     </div>
   );
 }
+
+export default React.memo(FAQItem);

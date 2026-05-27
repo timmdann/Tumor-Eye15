@@ -18,7 +18,11 @@ import TermsOfService from "./pages/TermsOfService";
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <div key={location.pathname} className="page-enter">
+    <div
+      key={location.pathname}
+      className="page-enter"
+      style={{ fontFamily: "Abhaya Libre, serif" }}
+    >
       <Routes location={location}>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Soon name="Login" />} />
@@ -30,6 +34,7 @@ function AnimatedRoutes() {
         <Route path="/student/result" element={<StudentAnalysis />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/profile" element={<Soon name="Profile" />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

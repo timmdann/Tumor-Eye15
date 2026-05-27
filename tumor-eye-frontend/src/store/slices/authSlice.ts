@@ -20,6 +20,19 @@ const initialState: AuthState = {
   error: null,
 };
 
+const AUTH_ERROR_MAP: Record<string, string> = {
+  "User already registered": "An account with this email already exists.",
+  "Invalid login credentials": "Incorrect email or password.",
+  "Email not confirmed": "Please confirm your email before logging in.",
+  "Password should be at least 6 characters": "Password must be at least 6 characters.",
+  "Unable to validate email address: invalid format": "Please enter a valid email address.",
+  "signup is disabled": "New registrations are currently disabled.",
+};
+
+function translateAuthError(message: string): string {
+  return AUTH_ERROR_MAP[message] ?? "Something went wrong. Please try again.";
+}
+
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (
@@ -31,13 +44,17 @@ export const registerUser = createAsyncThunk(
     }: { email: string; password: string; username: string; role: UserRole },
     { rejectWithValue },
   ) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { username, role } },
-    });
-    if (error) return rejectWithValue(error.message);
-    return data;
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { username, role } },
+      });
+      if (error) return rejectWithValue(translateAuthError(error.message));
+      return data;
+    } catch {
+      return rejectWithValue("Something went wrong. Please try again.");
+    }
   },
 );
 
@@ -47,18 +64,30 @@ export const loginUser = createAsyncThunk(
     { email, password }: { email: string; password: string },
     { rejectWithValue },
   ) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) return rejectWithValue(error.message);
-    return data;
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) return rejectWithValue(translateAuthError(error.message));
+      return data;
+    } catch {
+      return rejectWithValue("Something went wrong. Please try again.");
+    }
   },
 );
 
-export const logoutUser = createAsyncThunk("auth/logout", async () => {
-  await supabase.auth.signOut();
-});
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) return rejectWithValue("Failed to sign out. Please try again.");
+    } catch {
+      return rejectWithValue("Failed to sign out. Please try again.");
+    }
+  },
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -95,17 +124,19 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        const meta = action.payload.user?.user_metadata;
+        const meta = action.payload?.user?.user_metadata;
         if (meta) {
-          state.role = meta.role;
-          state.username = meta.username;
-          state.email = action.payload.user?.email ?? null;
+          state.role = meta.role as UserRole;
+          state.username = meta.username as string;
+          state.email = action.payload?.user?.email ?? null;
           state.isAuthenticated = true;
         }
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = typeof action.payload === "string"
+          ? action.payload
+          : "Something went wrong. Please try again.";
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -113,17 +144,19 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        const meta = action.payload.user?.user_metadata;
+        const meta = action.payload?.user?.user_metadata;
         if (meta) {
-          state.role = meta.role;
-          state.username = meta.username;
-          state.email = action.payload.user?.email ?? null;
+          state.role = meta.role as UserRole;
+          state.username = meta.username as string;
+          state.email = action.payload?.user?.email ?? null;
           state.isAuthenticated = true;
         }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = typeof action.payload === "string"
+          ? action.payload
+          : "Something went wrong. Please try again.";
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.role = null;

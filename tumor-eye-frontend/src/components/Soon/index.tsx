@@ -1,14 +1,18 @@
+import React from "react";
+
 interface SoonProps {
   name: string;
 }
 
-export default function Soon({ name }: SoonProps) {
+function Soon({ name }: SoonProps) {
   return (
     <div
       className="min-h-screen flex items-center justify-center text-2xl"
-      style={{ color: "var(--c-text)" }}
+      style={{ color: "var(--c-text)", fontFamily: "Abhaya Libre, serif" }}
     >
-      {name} - coming soon
+      {name} — coming soon
     </div>
   );
 }
+
+export default React.memo(Soon);
