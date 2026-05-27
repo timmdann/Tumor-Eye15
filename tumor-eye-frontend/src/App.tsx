@@ -15,6 +15,8 @@ import DoctorAnalysis from "@/pages/DoctorAnalysis";
 import DoctorChat from "@/pages/DoctorChat";
 import TermsOfService from "@/pages/TermsOfService";
 import Login from "@/pages/Login";
+import Profile from "./pages/Profile";
+
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -28,6 +30,7 @@ function AnimatedRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/doctor/upload" element={<DoctorAnalysis />} />
         <Route path="/doctor/result" element={<DoctorAnalysis />} />
         <Route path="/doctor/chat" element={<DoctorChat />} />
