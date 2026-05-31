@@ -2,6 +2,7 @@ import { useAppSelector } from "@/lib/hooks";
 import { Link } from "react-router-dom";
 import TopPanel from "@/components/TopPanel";
 import BrainImage from "@/components/BrainImage";
+import AuthSidebar from "@/components/AuthSidebar";
 
 export default function Profile() {
   const { username, email, role } = useAppSelector((s) => s.auth);
@@ -14,28 +15,7 @@ export default function Profile() {
         fontFamily: "Abhaya Libre, serif",
       }}
     >
-      {/* Sidebar */}
-      <aside
-        className="shrink-0 w-full md:w-90 md:min-h-screen px-8 md:px-12.5 pt-8 pb-6 md:pt-29.5 md:pb-0 anim-fade-up"
-        style={{ backgroundColor: "var(--c-sidebar)" }}
-      >
-        <h1
-          className="text-[22px] md:text-[25px] leading-tight font-extrabold mb-5 whitespace-nowrap"
-          style={{ color: "var(--c-sidebar-text)" }}
-        >
-          Your Profile
-        </h1>
-        <div
-          className="w-[175px] h-px mb-3"
-          style={{ backgroundColor: "var(--c-accent)" }}
-        />
-        <p
-          className="text-[14px] font-semibold"
-          style={{ color: "var(--c-accent)" }}
-        >
-          TumorEye&apos;15
-        </p>
-      </aside>
+      <AuthSidebar title="Your Profile" />
 
       {/* Main content */}
       <main className="flex-1 relative min-h-screen overflow-hidden">

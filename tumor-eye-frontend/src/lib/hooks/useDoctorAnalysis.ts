@@ -33,9 +33,12 @@ export function useDoctorAnalysis() {
 
   useEffect(() => {
     if (step !== "analyzing") return;
-    const timer = window.setTimeout(() => setStep("result"), 5000);
+    const timer = window.setTimeout(() => {
+      setStep("result");
+      navigate("/doctor/result", { replace: true });
+    }, 5000);
     return () => window.clearTimeout(timer);
-  }, [step]);
+  }, [step, navigate]);
 
   function handleUpload(file: File) {
     const reader = new FileReader();
@@ -63,6 +66,7 @@ export function useDoctorAnalysis() {
   function handleNewScan() {
     resetSession();
     setStep("upload");
+    navigate("/doctor/upload", { replace: true });
   }
 
   function handleBackToUpload() {

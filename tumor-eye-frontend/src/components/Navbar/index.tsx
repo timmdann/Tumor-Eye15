@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@/context/ThemeContext";
 import ThemeIcon from "@/components/ThemeIcon";
 import { NAV_LINKS } from "@/data/navLinks";
+
+const NAV_PATHS = NAV_LINKS.map((l) => l.path);
 
 interface NavbarProps {
   backTo?: string;
@@ -10,9 +12,12 @@ interface NavbarProps {
 
 function Navbar({ backTo }: NavbarProps = {}) {
   const { isDark, toggleTheme } = useTheme();
+  const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const toggleMobile = useCallback(() => setMobileOpen((prev) => !prev), []);
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  const replaceHistory = (NAV_PATHS as string[]).includes(pathname);
 
   const links = backTo
     ? [{ label: "← Back", path: backTo }, ...NAV_LINKS.slice(0, -1)]
@@ -37,6 +42,7 @@ function Navbar({ backTo }: NavbarProps = {}) {
             <Link
               key={label}
               to={path}
+              replace={replaceHistory}
               className="text-base font-extrabold no-underline opacity-90 hover:opacity-100 transition-opacity whitespace-nowrap"
               style={{ color: "var(--c-text)" }}
             >
@@ -106,6 +112,7 @@ function Navbar({ backTo }: NavbarProps = {}) {
             <Link
               key={label}
               to={path}
+              replace={replaceHistory}
               onClick={closeMobile}
               className="flex items-center px-6 py-3 text-sm font-extrabold no-underline hover:opacity-80 transition-opacity min-h-12"
               style={{ color: "var(--c-text)" }}

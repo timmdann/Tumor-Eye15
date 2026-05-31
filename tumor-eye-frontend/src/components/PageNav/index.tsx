@@ -35,6 +35,7 @@ function PageNav({ links }: PageNavProps) {
           <Link
             key={label}
             to={to}
+            replace
             className="no-underline text-[13px] font-bold whitespace-nowrap"
             style={{ color: "var(--c-panel-text)" }}
           >

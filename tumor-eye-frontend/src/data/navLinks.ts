@@ -16,3 +16,9 @@ export const FAQ_NAV_LINKS = [
   { label: "Terms of Service", to: "/terms" },
   { label: "Profile", to: "/profile" },
 ];
+
+export const TERMS_NAV_LINKS = [
+  { label: "About Us", to: "/about" },
+  { label: "FAQ", to: "/faq" },
+  { label: "Profile", to: "/profile" },
+];
