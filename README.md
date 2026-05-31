@@ -2,6 +2,82 @@
 
 AI-powered brain MRI analysis for medical learning and support.
 
+🔗 **Live demo:** [https://tumor-eye15.vercel.app/](https://tumor-eye15.vercel.app/)
+
+---
+
+## Screenshots
+
+### Landing
+
+![Landing](tumor-eye-frontend/docs/screenshots/landing.png)
+
+### Login & Register
+
+![Login](tumor-eye-frontend/docs/screenshots/login.png)
+![Register](tumor-eye-frontend/docs/screenshots/register.png)
+
+### Doctor — MRI Analysis
+
+![Doctor Upload](tumor-eye-frontend/docs/screenshots/doctor-upload.png)
+![Doctor Result](tumor-eye-frontend/docs/screenshots/doctor-result.png)
+![Doctor Chat](tumor-eye-frontend/docs/screenshots/doctor-chat.png)
+
+### Student — MRI Practice
+
+![Student Upload](tumor-eye-frontend/docs/screenshots/student-upload.png)
+![Student Result](tumor-eye-frontend/docs/screenshots/student-result.png)
+
+### Info Pages
+
+![About Us](tumor-eye-frontend/docs/screenshots/about.png)
+![FAQ](tumor-eye-frontend/docs/screenshots/faq.png)
+![Terms of Service](tumor-eye-frontend/docs/screenshots/terms.png)
+
+---
+
+## Pages & Routes
+
+| Route             | Page                 | Access         |
+| ----------------- | -------------------- | -------------- |
+| `/`               | Landing              | Public         |
+| `/login`          | Login                | Public         |
+| `/register`       | Register             | Public         |
+| `/profile`        | Profile              | Auth           |
+| `/doctor/upload`  | Doctor MRI Analysis  | Auth (doctor)  |
+| `/doctor/result`  | Doctor Result        | Auth (doctor)  |
+| `/doctor/chat`    | AI Chat Assistant    | Auth (doctor)  |
+| `/student/upload` | Student MRI Practice | Auth (student) |
+| `/student/result` | Student Result       | Auth (student) |
+| `/about`          | About Us             | Public         |
+| `/faq`            | FAQ                  | Public         |
+| `/terms`          | Terms of Service     | Public         |
+| `*`               | 404 Not Found        | Public         |
+
+---
+
+## Authentication
+
+Authentication is handled by **Supabase** (Email/Password).  
+User role (`doctor` | `student`) is stored in `user_metadata` at registration and used on login to redirect to the correct workflow.
+
+---
+
+## Analytics
+
+### Google Analytics 4
+
+Initialized via `gtag.js` in `index.html` (Measurement ID: `G-S8FJQMSGGP`).  
+Route changes tracked automatically via `AnalyticsListener` component inside `BrowserRouter`.
+
+![Google Analytics](docs/screenshots/analytics-ga.png)
+
+### ContentSquare (Hotjar)
+
+Tracking script injected in `index.html`. **Tracking URL changes: ENABLED** — automatically captures SPA route transitions.
+
+![ContentSquare Dashboard](docs/screenshots/analytics-hotjar.png)
+
 ---
 
 ## Tech Stack
@@ -12,7 +88,8 @@ AI-powered brain MRI analysis for medical learning and support.
 - **Redux Toolkit** — global state (analysis result, auth)
 - **React Context** — theme (dark/light)
 - **React Router v7** — navigation
-- **Axios** — HTTP requests to Django backend
+- **Supabase** — authentication (Email/Password, user metadata)
+- **Axios** — HTTP requests to AI analysis backend
 - **ESLint** — linting
 
 ---
@@ -21,46 +98,87 @@ AI-powered brain MRI analysis for medical learning and support.
 
 ```
 src/
-├── components/         # Reusable UI components
-│   ├── Button/         # Each component in its own folder
-│   │   └── index.tsx
-│   ├── Navbar/
-│   │   └── index.tsx
-│   └── ui/             # Small atomic elements (inputs, badges, etc.)
+├── components/                   # Reusable UI — each in its own folder
+│   ├── AnalyticsListener/        # GA4 route change tracker
+│   ├── AuthSidebar/              # Sidebar shared by Login, Register, Profile
+│   ├── BrainImage/               # Animated brain MRI with levitate + shadow
+│   ├── Button/                   # Generic button (variant: panel | accent)
+│   ├── ChatInput/                # Chat text input + send button
+│   ├── ChatMessage/              # Single chat bubble (user | assistant)
+│   ├── ErrorMessage/             # Auth error display
+│   ├── FAQItem/                  # Accordion item for FAQ page
+│   ├── FormInput/                # Labelled text input with animation
+│   ├── Navbar/                   # Top-right nav panel (landing page)
+│   ├── PageNav/                  # Top-right nav panel (info pages)
+│   ├── PasswordInput/            # Password field with show/hide toggle
+│   ├── RoleButton/               # Doctor / Student role selector
+│   ├── ThemeIcon/                # Sun / Moon SVG icon
+│   ├── TopPanel/                 # Theme toggle panel (auth pages)
+│   ├── AppPanelLayout/           # Layout wrapper for Doctor/Student app
+│   ├── AdjustmentsPanel/         # Image adjustment sliders (doctor)
+│   ├── AnalyzingScreen/          # Full-screen loading state
+│   ├── DoctorImagePreview/       # MRI image with detection overlay
+│   ├── DoctorResultSidebar/      # Analysis result actions sidebar
+│   ├── DoctorUploadArea/         # Drag & drop upload zone (doctor)
+│   ├── ExerciseSidebar/          # Student annotation controls
+│   ├── MiniDetectionBox/         # Small detection box in chat preview
+│   ├── StudentImagePreview/      # MRI image with student annotation
+│   ├── StudentResultSidebar/     # Comparison result sidebar (student)
+│   ├── StudentUploadArea/        # Upload zone (student)
+│   ├── InfoBlock/                # Text block used on About page
+│   ├── PageFooter/               # Page footer
+│   └── TypingDots/               # Animated dots for AI typing state
 │
-├── context/            # React Context providers
-│   └── ThemeContext.tsx # Dark/light theme toggle
+├── context/
+│   └── ThemeContext.tsx          # Dark/light theme — persisted in localStorage
 │
-├── lib/                # Utilities and helpers
-│   ├── api.ts          # Axios instance + API functions
-│   └── hooks.ts        # Typed Redux hooks (useAppDispatch, useAppSelector)
+├── data/                         # Static constants and content
+│   ├── navLinks.ts               # Navigation link arrays per page
+│   ├── faqItems.ts               # FAQ questions & answers
+│   ├── termsData.ts              # Terms of Service sections
+│   ├── detectionData.ts          # AI detection box coordinates
+│   ├── howItWorks.ts
+│   ├── mriItems.ts
+│   ├── textTypeItems.ts
+│   └── trustStats.ts
 │
-├── pages/              # One file per route/page
+├── lib/
+│   ├── hooks.ts                  # useAppDispatch, useAppSelector
+│   ├── supabase.ts               # Supabase client
+│   ├── hooks/
+│   │   ├── useDoctorAnalysis.ts  # Doctor upload/adjust/result flow
+│   │   ├── useDoctorChat.ts      # AI chat logic
+│   │   ├── useStudentAnalysis.ts # Student upload/exercise/result flow
+│   │   └── usePasswordToggle.ts
+│   └── utils/
+│       ├── chatSimulator.ts
+│       ├── reportImage.ts
+│       └── selectionBox.ts
+│
+├── pages/                        # One file per route
 │   ├── Landing.tsx
 │   ├── Login.tsx
 │   ├── Register.tsx
-│   ├── doctor/
-│   │   ├── Upload.tsx
-│   │   ├── Result.tsx
-│   │   └── Chat.tsx
-│   └── student/
-│       ├── Upload.tsx
-│       └── Result.tsx
+│   ├── Profile.tsx
+│   ├── DoctorAnalysis.tsx
+│   ├── DoctorChat.tsx
+│   ├── StudentAnalysis.tsx
+│   ├── AboutUs.tsx
+│   ├── FAQ.tsx
+│   ├── TermsOfService.tsx
+│   └── NotFound.tsx
 │
-├── store/              # Redux store
-│   ├── index.ts        # configureStore
+├── store/
+│   ├── index.ts                  # configureStore
 │   └── slices/
-│       ├── authSlice.ts      # role, isAuthenticated, username
-│       └── analysisSlice.ts  # result, status, error
+│       └── authSlice.ts          # role, isAuthenticated, username, email
 │
-├── styles/             # Global styles (if split from index.css)
+├── types/
+│   └── api.ts                    # PredictResponse, Detection, UserRole
 │
-├── types/              # TypeScript interfaces
-│   └── api.ts          # PredictResponse, Detection, UserRole
-│
-├── App.tsx             # Router + routes
-├── main.tsx            # Entry point, providers
-└── index.css           # Global CSS, CSS variables, animations
+├── App.tsx                       # BrowserRouter + AnimatedRoutes + AnalyticsListener
+├── main.tsx                      # Entry point, Redux + ThemeProvider
+└── index.css                     # Tailwind v4, CSS variables, animations
 ```
 
 ---
