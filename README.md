@@ -10,29 +10,29 @@ AI-powered brain MRI analysis for medical learning and support.
 
 ### Landing
 
-![Landing](docs/screenshots/landing.png)
+![Landing](tumor-eye-frontend/docs/screenshots/landing.png)
 
 ### Login & Register
 
-![Login](docs/screenshots/login.png)
-![Register](docs/screenshots/register.png)
+![Login](tumor-eye-frontend/docs/screenshots/login.png)
+![Register](tumor-eye-frontend/docs/screenshots/register.png)
 
 ### Doctor — MRI Analysis
 
-![Doctor Upload](docs/screenshots/doctor-upload.png)
-![Doctor Result](docs/screenshots/doctor-result.png)
-![Doctor Chat](docs/screenshots/doctor-chat.png)
+![Doctor Upload](tumor-eye-frontend/docs/screenshots/doctor-upload.png)
+![Doctor Result](tumor-eye-frontend/docs/screenshots/doctor-result.png)
+![Doctor Chat](tumor-eye-frontend/docs/screenshots/doctor-chat.png)
 
 ### Student — MRI Practice
 
-![Student Upload](docs/screenshots/student-upload.png)
-![Student Result](docs/screenshots/student-result.png)
+![Student Upload](tumor-eye-frontend/docs/screenshots/student-upload.png)
+![Student Result](tumor-eye-frontend/docs/screenshots/student-result.png)
 
 ### Info Pages
 
-![About Us](docs/screenshots/about.png)
-![FAQ](docs/screenshots/faq.png)
-![Terms of Service](docs/screenshots/terms.png)
+![About Us](tumor-eye-frontend/docs/screenshots/about.png)
+![FAQ](tumor-eye-frontend/docs/screenshots/faq.png)
+![Terms of Service](tumor-eye-frontend/docs/screenshots/terms.png)
 
 ---
 
