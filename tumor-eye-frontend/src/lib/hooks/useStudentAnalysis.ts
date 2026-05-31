@@ -1,9 +1,11 @@
 import { type ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { SelectionBox } from "@/lib/utils/selectionBox";
 
 export type StudentStep = "upload" | "exercise" | "analyzing" | "result";
 
 export function useStudentAnalysis() {
+  const navigate = useNavigate();
   const [step, setStep] = useState<StudentStep>("upload");
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [fileName, setFileName] = useState("");
@@ -42,6 +44,7 @@ export function useStudentAnalysis() {
     setFileName("");
     setStudentSelection(null);
     setStep("upload");
+    navigate("/student/upload", { replace: true });
   }
 
   function handleBackToUpload() {
@@ -49,6 +52,7 @@ export function useStudentAnalysis() {
     setFileName("");
     setStudentSelection(null);
     setStep("upload");
+    navigate("/student/upload", { replace: true });
   }
 
   function handleTryAgain() {
@@ -58,7 +62,10 @@ export function useStudentAnalysis() {
 
   function handleSubmitAnswer() {
     setStep("analyzing");
-    analyzingTimerRef.current = window.setTimeout(() => setStep("result"), 5000);
+    analyzingTimerRef.current = window.setTimeout(() => {
+      setStep("result");
+      navigate("/student/result", { replace: true });
+    }, 5000);
   }
 
   return {

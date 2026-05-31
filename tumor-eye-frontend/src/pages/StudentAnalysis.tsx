@@ -5,9 +5,7 @@ import StudentImagePreview from "@/components/StudentImagePreview";
 import ExerciseSidebar from "@/components/ExerciseSidebar";
 import StudentResultSidebar from "@/components/StudentResultSidebar";
 import { useStudentAnalysis } from "@/lib/hooks/useStudentAnalysis";
-import type { SelectionBox } from "@/lib/utils/selectionBox";
-
-const AI_DETECTION_BOX: SelectionBox = { x: 40.5, y: 25.8, width: 14, height: 12.5 };
+import { AI_DETECTION_BOX } from "@/data/detectionData";
 
 export default function StudentAnalysis() {
   const {

@@ -1,16 +1,1 @@
-{
-  "root": [
-    "./src/app.tsx",
-    "./src/main.tsx",
-    "./src/vite-env.d.ts",
-    "./src/components/button/index.tsx",
-    "./src/components/faqitem/index.tsx",
-    "./src/components/navbar/index.tsx",
-    "./src/components/soon/index.tsx",
-    "./src/context/themecontext.tsx",
-    "./src/pages/faq.tsx",
-    "./src/pages/landing.tsx",
-    "./src/types/api.ts"
-  ],
-  "version": "6.0.3"
-}
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/adjustmentspanel/index.tsx","./src/components/analyticslistener/index.tsx","./src/components/analyzingscreen/index.tsx","./src/components/apppanellayout/index.tsx","./src/components/authsidebar/index.tsx","./src/components/backthemepanel/index.tsx","./src/components/backgroundlayers/index.tsx","./src/components/brainimage/index.tsx","./src/components/button/index.tsx","./src/components/chatinput/index.tsx","./src/components/chatmessage/index.tsx","./src/components/doctorimagepreview/index.tsx","./src/components/doctorresultsidebar/index.tsx","./src/components/doctoruploadarea/index.tsx","./src/components/errormessage/index.tsx","./src/components/exercisesidebar/index.tsx","./src/components/faqitem/index.tsx","./src/components/forminput/index.tsx","./src/components/howitworksstrip/index.tsx","./src/components/infoblock/index.tsx","./src/components/landingdesktop/index.tsx","./src/components/landingmobile/index.tsx","./src/components/masonry/index.tsx","./src/components/minidetectionbox/index.tsx","./src/components/navbar/index.tsx","./src/components/pagefooter/index.tsx","./src/components/pagenav/index.tsx","./src/components/passwordinput/index.tsx","./src/components/privateroute/index.tsx","./src/components/rolebutton/index.tsx","./src/components/sidebutton/index.tsx","./src/components/soon/index.tsx","./src/components/studentimagepreview/index.tsx","./src/components/studentresultsidebar/index.tsx","./src/components/studentuploadarea/index.tsx","./src/components/texttype/index.tsx","./src/components/themeicon/index.tsx","./src/components/toppanel/index.tsx","./src/components/truststats/index.tsx","./src/components/typingdots/index.tsx","./src/context/themecontext.tsx","./src/data/detectiondata.ts","./src/data/faqitems.ts","./src/data/howitworks.ts","./src/data/mriitems.ts","./src/data/navlinks.ts","./src/data/termsdata.ts","./src/data/texttypeitems.ts","./src/data/truststats.ts","./src/lib/hooks.ts","./src/lib/supabase.ts","./src/lib/hooks/usedoctoranalysis.ts","./src/lib/hooks/usedoctorchat.ts","./src/lib/hooks/usepasswordtoggle.ts","./src/lib/hooks/usestudentanalysis.ts","./src/lib/utils/chatsimulator.ts","./src/lib/utils/reportimage.ts","./src/lib/utils/selectionbox.ts","./src/pages/aboutus.tsx","./src/pages/doctoranalysis.tsx","./src/pages/doctorchat.tsx","./src/pages/faq.tsx","./src/pages/landing.tsx","./src/pages/login.tsx","./src/pages/notfound.tsx","./src/pages/profile.tsx","./src/pages/register.tsx","./src/pages/studentanalysis.tsx","./src/pages/termsofservice.tsx","./src/store/index.ts","./src/store/slices/authslice.ts","./src/styles/tokens.ts","./src/types/api.ts"],"version":"6.0.3"}
