@@ -70,13 +70,13 @@ User role (`doctor` | `student`) is stored in `user_metadata` at registration an
 Initialized via `gtag.js` in `index.html` (Measurement ID: `G-S8FJQMSGGP`).  
 Route changes tracked automatically via `AnalyticsListener` component inside `BrowserRouter`.
 
-![Google Analytics](docs/screenshots/analytics-ga.png)
+![Google Analytics](tumor-eye-frontend/docs/screenshots/analytics-ga.png)
 
 ### ContentSquare (Hotjar)
 
 Tracking script injected in `index.html`. **Tracking URL changes: ENABLED** — automatically captures SPA route transitions.
 
-![ContentSquare Dashboard](docs/screenshots/analytics-hotjar.png)
+![ContentSquare Dashboard](tumor-eye-frontend/docs/screenshots/analytics-hotjar.png)
 
 ---
 
