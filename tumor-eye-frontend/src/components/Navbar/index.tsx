@@ -32,7 +32,7 @@ function Navbar({ backTo }: NavbarProps = {}) {
       <nav
         className="anim-slide-down hidden md:flex items-center px-7 rounded-bl-lg absolute right-0 top-0"
         style={{
-          width: 560,
+          width: 452,
           height: "var(--navbar-height)",
           backgroundColor: "var(--c-panel)",
         }}
