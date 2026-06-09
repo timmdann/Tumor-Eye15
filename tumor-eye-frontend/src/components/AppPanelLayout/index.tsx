@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@/context/ThemeContext";
 import ThemeIcon from "@/components/ThemeIcon";
 import type { CSSProperties, ReactNode } from "react";
@@ -110,7 +110,15 @@ export default function AppPanelLayout({
               <ThemeButton isDark={isDark} toggleTheme={toggleTheme} />
             </TopRightPanel>
           ) : showLogout ? (
-            <TopRightPanel>
+            <TopRightPanel width={240}>
+              <Link
+                to="/profile"
+                className="text-[14px] font-extrabold no-underline leading-none"
+                style={{ color: "var(--c-panel-text)" }}
+              >
+                Profile
+              </Link>
+
               <button
                 type="button"
                 onClick={handleLogout}
@@ -155,18 +163,11 @@ export default function AppPanelLayout({
   );
 }
 
-function TopRightPanel({ children }: { children: ReactNode }) {
+function TopRightPanel({ children, width = 176 }: { children: ReactNode; width?: number }) {
   return (
     <div
-      className="
-        w-[176px] h-[74px]
-        rounded-bl-md
-        flex
-        items-center
-        justify-center
-        gap-[24px]
-      "
-      style={{ backgroundColor: "var(--c-panel)" }}
+      className="h-18.5 rounded-bl-md flex items-center justify-center gap-6"
+      style={{ backgroundColor: "var(--c-panel)", width }}
     >
       {children}
     </div>
